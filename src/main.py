@@ -44,13 +44,19 @@ def delete_hero(hero_id):
 # Define a function to select and display all heroes and their friends
 def select_all_heroes():
     # Create an SQL query to select hero names and their friends from the 'heroes' and 'friends' tables
+    # alias relationships as r
+
     query = """
-        SELECT heroes.name, friends.name
-        FROM heroes
-        LEFT JOIN friends ON heroes.id = friends.hero_id
+        SELECT hero1.name, hero2.name, rt.name FROM relationships
+        JOIN heroes hero1 ON relationships.hero1_id = hero1.id
+        JOIN heroes hero2 ON relationships.hero2_id = hero2.id
+        Join relationship_types rt ON relationships.relationship_type_id = rt.id
+
     """
+   
     # Execute the SQL query using the execute_query function and store the results in 'returned_items'
     returned_items = execute_query(query)
+    # print(returned_items,"full item list")
     # Create an empty dictionary to store the heroes and their friends
     heroes = {}
     
@@ -59,14 +65,18 @@ def select_all_heroes():
         #    to the heroes
         hero_name = item[0]
         friend_name = item[1]
+        enemy_name = item[2]
         if hero_name not in heroes:
             # Add hero category
             heroes[hero_name] = []
         if friend_name:
             heroes[hero_name].append(friend_name)
-    for hero_name, friends in heroes.items():
-        # Print the hero's name and their friends
-        print(f"{hero_name} has friends: {', '.join(friends)}")
+        if enemy_name:
+            heroes[hero_name].append(enemy_name)
+
+    for hero_name, friend in heroes.items():
+        # Print the hero's name and their friends/enemies
+        print(f"{hero_name} has friends: {', '.join(friend) }")
 
 # Define a function to interact with the user and perform various operations
 def prompt_user():
