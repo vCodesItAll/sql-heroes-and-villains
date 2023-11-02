@@ -51,6 +51,7 @@ def select_all_heroes():
         JOIN heroes hero1 ON relationships.hero1_id = hero1.id
         JOIN heroes hero2 ON relationships.hero2_id = hero2.id
         Join relationship_types rt ON relationships.relationship_type_id = rt.id
+        
 
     """
    
@@ -77,6 +78,9 @@ def select_all_heroes():
     for hero_name, friend in heroes.items():
         # Print the hero's name and their friends/enemies
         print(f"{hero_name} has friends: {', '.join(friend) }")
+        
+
+
 
 # Define a function to interact with the user and perform various operations
 def prompt_user():
