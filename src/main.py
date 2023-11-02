@@ -59,24 +59,39 @@ def select_all_heroes():
     returned_items = execute_query(query)
     # print(returned_items,"full item list")
     # Create an empty dictionary to store the heroes and their friends
-    heroes = {}
+    hero_friends = {}
+    hero_enemies = {}
     
     for item in returned_items:
         # If the friend is not None (i.e., it exists), add it as a key-value pair 
-        #    to the heroes
+        #    to the hero_friends
         hero_name = item[0]
-        friend_name = item[1]
-        enemy_name = item[2]
-        if hero_name not in heroes:
+        friend_name=""
+        enemy_name =""
+        if item[2] == 'Friend':
+            friend_name = item[1]
+        elif item[2] == 'Enemy':
+            enemy_name = item[1]
+            
+        if hero_name not in hero_friends:
             # Add hero category
-            heroes[hero_name] = []
+            hero_friends[hero_name] = []
         if friend_name:
-            heroes[hero_name].append(friend_name)
+            hero_friends[hero_name].append(friend_name)
+  
+        if hero_name not in hero_enemies:
+            # Add hero category
+            hero_enemies[hero_name] = []
         if enemy_name:
-            heroes[hero_name].append(enemy_name)
+            hero_enemies[hero_name].append(enemy_name) 
 
-    for hero_name, friend in heroes.items():
+    # print(hero_friends)
+    # print(hero_enemies)
+    # print(returned_items)
+    for hero_name, enemy in hero_enemies.items():
         # Print the hero's name and their friends/enemies
+        print(f"{hero_name} has enemies: {', '.join(enemy) }")
+    for hero_name, friend in hero_friends.items():
         print(f"{hero_name} has friends: {', '.join(friend) }")
         
 
