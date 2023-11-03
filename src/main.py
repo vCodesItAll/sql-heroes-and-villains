@@ -7,10 +7,9 @@ def add_hero(name, about_me, biography, image_url):
         INSERT INTO heroes (name, about_me, biography, image_url)
         VALUES ('{name}', '{about_me}', {biography}, '{image_url}')
     """
-    # Execute the SQL query using the execute_query function
     execute_query(query)
 
-# Define a function to update a hero's information in the database
+# Update a hero's information in the database
 def update_hero(hero_id, name=None, about_me=None, biography=None, image_url=None):
     set_values = []
     if name:
@@ -22,7 +21,7 @@ def update_hero(hero_id, name=None, about_me=None, biography=None, image_url=Non
     if image_url:
         set_values.append(f"image_url = '{image_url}'")
     set_values_str = ", ".join(set_values)
-    # Create an SQL query to update a hero's information in the 'heroes' table
+    # Update a hero's information in the 'heroes' table
     query = f"""
         UPDATE heroes
         SET {set_values_str}
