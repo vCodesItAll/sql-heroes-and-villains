@@ -3,7 +3,7 @@
 SQL Heroes is a social media app that connects Heroes with Abilities to other Heroes and/or Villians.
 
 ## Usage
-
+This program is an interactive python shell script.
 - Type 'python src/main.py' in terminal
 - Respond to prompts to:
   1. Add a hero
@@ -14,3 +14,4 @@ SQL Heroes is a social media app that connects Heroes with Abilities to other He
 
 ## License
 This project not licensed.
+
